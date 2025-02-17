@@ -1,0 +1,98 @@
+<odoo>
+    <data>
+
+        Create a Demo User Group
+        <record id="group_demo_user_new" model="res.groups">
+            <field name="name">Demo User</field>
+            
+        </record>
+
+        Create Admin group
+        <record id="group_admin_new" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="implied_ids" eval="[(4, ref('group_demo_user_new'))]"/>
+          
+        </record>
+
+        <record id="access_patient_demo_user" model="ir.model.access">
+            <field name="name">access_patient_demo_user</field>
+            <field name="model_id" ref="civil_hospital.model_hospital_patient"/> 
+            <field name="group_id" ref="group_demo_user_new"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="access_appointment_demo_user" model="ir.model.access">
+            <field name="name">access_appointment_demo_user</field>
+            <field name="model_id" ref="civil_hospital.model_hospital_appointment"/> 
+            <field name="group_id" ref="group_demo_user_new"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="access_patient_admin" model="ir.model.access">
+            <field name="name">access_patient_admin</field>
+            <field name="model_id" ref="civil_hospital.model_hospital_patient"/>
+            <field name="group_id" ref="group_admin_new"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+    
+        <record id="access_appointment_admin" model="ir.model.access">
+            <field name="name">access_appointment_admin</field>
+            <field name="model_id" ref="civil_hospital.model_hospital_appointment"/>
+            <field name="group_id" ref="group_admin_new"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+     
+        <record id="access_all_models_admin" model="ir.model.access">
+            <field name="name">access_all_models_admin</field>
+            <field name="model_id" ref="civil_hospital.model_hospital_medication"/>
+            <field name="group_id" ref="group_admin_new"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+
+        <record id="access_all_models_admin" model="ir.model.access">
+            <field name="name">access_all_models_admin</field>
+            <field name="model_id" ref="civil_hospital.model_main_physician"/>
+            <field name="group_id" ref="group_admin_new"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+
+
+    <record id="patient_demo_user_rule" model="ir.rule">
+    <field name="name">Demo User - Patient Access</field>
+    <field name="model_id" ref="civil_hospital.model_hospital_appointment"/>
+    <field name="domain_force">[('user_id', '=', user.id)]</field>
+    <field name="groups" eval="[(4, ref('group_demo_user_new'))]"/>
+</record>
+
+<record id="appointment_demo_user_rule" model="ir.rule">
+    <field name="name">Demo User - Appointment Access</field>
+    <field name="model_id" ref="civil_hospital.model_hospital_appointment"/>
+    <field name="domain_force">[('user_id', '=', user.id)]</field>
+    <field name="groups" eval="[(4, ref('group_demo_user_new'))]"/>
+</record>
+
+
+    </data>
+</odoo>

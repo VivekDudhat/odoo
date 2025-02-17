@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="medicine_1" model="hospital.medicine">
+            <field name="medicine_name">Felxon</field>
+            <field name="medicine_cost">500</field>
+        </record>
+
+
+         <record id="medicine_2" model="hospital.medicine">
+            <field name="medicine_name">Move</field>
+            <field name="medicine_cost">300</field>
+        </record>
+           <record id="medicine_3" model="hospital.medicine">
+            <field name="medicine_name">Vicks</field>
+            <field name="medicine_cost">20</field>
+        </record>  
+        
+         <record id="medicine_4" model="hospital.medicine">
+            <field name="medicine_name">DNMR</field>
+            <field name="medicine_cost">350</field>
+        </record>
+
+           <record id="medicine_5" model="hospital.medicine">
+            <field name="medicine_name">Voloni</field>
+            <field name="medicine_cost">400</field>
+        </record>
+
+           <record id="medicine_6" model="hospital.medicine">
+            <field name="medicine_name">DolO 650</field>
+            <field name="medicine_cost">375</field>
+        </record>
+
+           <record id="medicine_7" model="hospital.medicine">
+            <field name="medicine_name">MIC</field>
+            <field name="medicine_cost">444</field>
+        </record>
+    
+    
+    </data>
+    
+</odoo>

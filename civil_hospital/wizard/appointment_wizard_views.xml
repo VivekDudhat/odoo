@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View appointment.wizard form -->
+    <record id="view_appointment_wizard_form" model="ir.ui.view">
+        <field name="name">view.appointment.wizard.form</field>
+        <field name="model">appointment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Appointment Wizard">
+                <sheet>
+                   <group>
+                        <field name="begin_date" string="Date Range" widget="daterange" options="{'end_date_field': 'end_date'}"/>
+                        <field name="end_date" invisible = "1"/>
+                   </group>
+                </sheet>
+                <footer>
+                    <button string="Download" name="action_appointment" type="object" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- View appointment.wizard search -->
+    <!-- <record id="view_appointment_wizard_search" model="ir.ui.view">
+        <field name="name">view.appointment.wizard.search</field>
+        <field name="model">appointment.wizard</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Group By">
+                    <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
+                </group>
+            </search>
+        </field>
+    </record> -->
+
+</odoo>

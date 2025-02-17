@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_hospital_patient_tree" model="ir.ui.view">
+            <field name="name">hospital.patient.tree</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="patient_name"/>
+                    <field name="gender"/>
+                    <field name="contact"/>
+                    <field name="email_id"/>
+                    <field name="date_of_birth"/>
+                    <field name="age"/>
+                    <field name="state" widget="badge" decoration-info = " state == 'active'" decoration-danger = " state == 'inactive'"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_hospital_patient_form" model="ir.ui.view">
+            <field name="name">hospital.patient.form</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <form string="Patient">
+                    <header>
+                        <field name="state" widget = "statusbar"/>
+                        <button name="action_active" type="object" string="Active" class = "oe_highlight" invisible = "state!= 'inactive'"/>
+                        <button name="action_inactive" type="object" string="Inactive" class = "oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div style="float: right; width: 200px; display: flex; flex-direction: column; gap: 10px;">
+                            <div>
+                                <field name="patient_image" widget="image" class="oe_avatar"/>
+                            </div>
+                        </div>
+
+                        <group>
+                            <field name="patient_name"/>
+                            <field name="gender" widget = "radio" options="{'horizontal': true}"/>
+                            <field name="date_of_birth"/>
+                            <field name="age" readonly="1"/>
+                            <field name="contact"/>
+                            <field name="email_id"/>
+                            <!-- <field name="cancel_uid"/>
+                            <field name="cancelation_date"/> -->
+                            <!-- <field name="html"/> -->
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_hospital_patient_search" model="ir.ui.view">
+            <field name="name">view.hospital.patient.search</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <group expand="1" string="Group By">
+                        <filter string="Gender" name="gender" domain="[]" context="{'group_by':'gender'}"/>
+                        <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                    <filter string="Male" name="gender_filter" domain="[('gender', '=', 'male')]" />
+                    <filter string="Female" name="gender_filter_female" domain="[('gender', '=', 'female')]" />
+                    <filter string="Active Patients" name="active_state_filter" domain="[('state', '=', 'active')]" />
+                    <filter string="Inactive Patients" name="inactive_state_filter" domain="[('state', '=', 'inactive')]" />
+                </search>
+            </field>
+        </record>
+
+
+
+        <!-- Action -->
+        <record id="action_hospital_patient" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="res_model">hospital.patient</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new patient.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_hospital_patient" name="Patients" action="action_hospital_patient" parent = "civil_hospital_menu" sequence = "30" groups = "group_demo_user_new"/>
+
+    </data>
+
+</odoo>

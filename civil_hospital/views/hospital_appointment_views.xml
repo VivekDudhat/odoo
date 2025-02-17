@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_hospital_appointment_tree" model="ir.ui.view">
+            <field name="name">hospital.appointment.tree</field>
+            <field name="model">hospital.appointment</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button string="Appointments Download" name="action_open_wizard" type="object" class="oe_highlight"/>
+                    </header>
+                    <field name="patient_id"/>
+                    <field name="doctor_id"/>
+                    <field name="specialization"/>
+                     <field name="appointment_date"/>
+                    <field name="time_slot"/>
+                    <field name="state"  widget="badge" decoration-success = " state == 'completed'" decoration-info = " state == 'confirmed'" decoration-danger = "state == 'cancelled'"/>
+                    <field name="total_cost"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_hospital_appointment_form" model="ir.ui.view">
+            <field name="name">hospital.appointment.form</field>
+            <field name="model">hospital.appointment</field>
+            <field name="arch" type="xml">
+                <form string="Appointment">
+
+                    <header>
+                       
+
+                        <field name="doctor_id" invisible="1"/>
+                        <button string=" ALL Appointments Download" name="action_open_wizard" type="object" class="oe_highlight" invisible = "state != 'completed'"/>
+                        <button name="action_confirm" type="object" string="Confirm" invisible="state != 'draft'" class="oe_highlight" icon="fa-check-circle"/>
+                        <button name="action_completed" type="object" string="Completed" invisible="state != 'confirmed'" class="oe_highlight" icon="fa-check"/>
+                        <button name="action_cancel" type="object" string="Cancel" invisible="state != 'confirmed'" class="oe_highlight" icon="fa-times"/>
+                        <button name="print_report" type="object" string="Print" invisible="state != 'completed'" class="oe_highlight" icon="fa-print"/>
+                        <!-- <button name="send_mail" type="object" string="Send Mail" class = "oe_highlight"/> -->
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,completed"/>
+                    </header>
+
+                    <!-- Form Fields -->
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button string="View Physician" class="oe_highlight" type="object" name="action_view_physician" icon="fa-user-md">
+                                <div class="o_field_widget o_stat_info">
+                                    <field string="Physician" name="physician_count" widget="statinfo" class="oe_inline"/>
+                                </div>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="email_id"/>
+                            <field name="doctor_id"/>
+                            <field name="specialization" readonly="1"/>
+                            <field name="appointment_date" widget="datetime" options='{"min_date": "today", "min_datetime": "today"}'/>
+                            <!-- <field name="appointment_date"/> -->
+                            <field name="time_slot"/>
+                            <field name="medicine_ids" widget = "many2many_tags" />
+                            <field name="total_medicine_cost"/>
+                             <!-- <field name="begin_date" string="Date Range" widget="daterange" options="{'end_date_field': 'end_date','min_date': 'today', 'min_datetime': 'today'}"/>
+                            <field name="end_date" invisible = "1"/> 
+                             <field name="new_appointment" widget="date" options='{"min_date": "today"}'/>  -->
+                            
+                        </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_hospital_appointment_search" model="ir.ui.view">
+            <field name="name">view.hospital.appointment.</field>
+            <field name="model">hospital.appointment</field>
+            <field name="arch" type="xml">
+                <search string="">
+                <filter name="Completed" domain="[('state', '=', 'completed')]" />
+                 <filter name="Confirmed" domain="[('state', '=', 'confirmed')]" />
+                </search>
+            </field>
+        </record>
+
+        <!-- Action for Appointments -->
+        <record id="action_hospital_appointment" model="ir.actions.act_window">
+            <field name="name">Appointments</field>
+            <field name="res_model">hospital.appointment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new appointment.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action for Physician's Appointments (Smart Button Link) -->
+        <record id="action_physician_appointments" model="ir.actions.act_window">
+            <field name="name">Physician Appointments</field>
+            <field name="res_model">hospital.appointment</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('doctor_id', '=', active_id)]</field>            <!-- Filter by the active doctor's ID -->
+
+        </record>
+
+
+
+        <!-- Menu Item for Appointments -->
+        <menuitem id="menu_hospital_appointment" name="Appointments" action="action_hospital_appointment" parent = "civil_hospital_menu" sequence = "40" groups = "group_demo_user_new"/>
+
+    </data>
+</odoo>

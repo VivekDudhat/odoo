@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="physician_main_menu_action" model="ir.actions.act_window">
+            <field name="name">Physician Menu</field>
+            <field name="res_model">main.physician</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Welcome To Physician Menu.
+                </p>
+            </field>
+
+        </record>
+        <menuitem id="physician_menu" name="Physician Menu" action="physician_main_menu_action" parent = "civil_hospital_menu"
+        sequence = "10" groups = "group_admin_new"/>
+
+
+    </data>
+
+
+</odoo>

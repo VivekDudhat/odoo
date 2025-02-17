@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+        <record id="send_mail_action_server" model="ir.actions.server">
+            <field name="name">Inactive </field>
+            <field name="model_id" ref="civil_hospital.model_hospital_patient"/>
+            <field name="binding_model_id" ref="civil_hospital.model_hospital_patient"/>
+            <field name="state">code</field>
+            <field name="code">
+                for record in records:
+                   if record.state == "active":
+                     record.action_inactive()
+            </field>
+            
+        </record>
+    
+    </data>
+
+</odoo>

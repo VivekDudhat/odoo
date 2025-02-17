@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View hospital.treatment View Tree -->
+    <record id="view_hospital_treatment_tree" model="ir.ui.view">
+        <field name="name">view.hospital.treatment.tree</field>
+        <field name="model">hospital.treatment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="patient_id"/>
+                <field name="total_cost"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- View hospital.treatment form -->
+    <record id="view_hospital_treatment_form" model="ir.ui.view">
+        <field name="name">view.hospital.treatment.form</field>
+        <field name="model">hospital.treatment</field>
+        <field name="arch" type="xml">
+            <form string="Hospital Treatment">
+                <sheet>
+                   <group>
+                            <!-- Patient Information -->
+                            <field name="patient_id"/>
+                            
+                            <!-- Many2many field for Medicines -->
+                            <field name="medicines" widget="many2many_tags" options="{'no_create': True}" string="Medicines"/>
+
+                            <!-- Display total cost of the treatment -->
+                            <field name="total_cost" readonly="1" string="Total Cost"/>
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View hospital.treatment search -->
+    <record id="view_hospital_treatment_search" model="ir.ui.view">
+        <field name="name">view.hospital.treatment.search</field>
+        <field name="model">hospital.treatment</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- <group expand="1" string="Group By">
+                    <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
+                </group> -->
+            </search>
+        </field>
+    </record>
+
+    <!-- Action hospital.treatment -->
+    <record id="action_hospital_treatment" model="ir.actions.act_window">
+        <field name="name">Hospital Treatment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.treatment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new Hospital Treatment.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="treatment_menu"
+        name="Treatment"
+        parent = "medication_menu"
+        action="action_hospital_treatment"
+       
+        sequence = "60"
+    />
+
+</odoo>

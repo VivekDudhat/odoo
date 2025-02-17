@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Action hospital.medication -->
+        <record id="action_hospital_medication" model="ir.actions.act_window">
+            <field name="name">Hospital Medication</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hospital.medication</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+            Welcome to Medication Hospital Medication.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="medication_menu" name="Dispensary" action="action_hospital_medication" parent="civil_hospital_menu"
+        groups = "group_admin_new" sequence="50"/>
+
+
+
+
+    </data>
+
+</odoo>

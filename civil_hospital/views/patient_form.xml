@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <template id="patient_form" name="Registration Form">
+            <t t-call="website.layout">
+                <div class = "container">
+                    <h2>
+                    Patient Registration Form
+                    </h2>
+                    <form action = '/patient/form/submit' method = 'POST' class = 'mt-4'>
+                        <div class = 'form-group'>
+                            <label for='patient_name'>Patient Name</label>
+                            <input type="text" class="form-control" id="patient_name" name="patient_name" required="True" />
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <div style="display: inline-block; margin-right: 10px;">
+                                <label class="radio-inline">
+                                    <input type="radio" id="gender_male" name="gender" value="male" required="True"/>
+                                        Male
+                                </label>
+                            </div>
+                            <div style="display: inline-block;">
+                                <label class="radio-inline">
+                                    <input type="radio" id="gender_female" name="gender" value="female" required="True"/>
+                                        Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class = 'form-group'>
+                            <label for='contact'>Contact Number</label>
+                            <input type="int" class="form-control" id="contact" name="contact" required="True" />
+                        </div>
+                        <div class="form-group">
+                            <label for="date_of_birth">Date of Birth</label>
+                            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email_id">Email</label>
+                            <input type="email" class="form-control" id="email_id" name="email_id" required="required"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </t>
+        </template>
+        <template id="patient_form_success" name="Patient Form Success">
+            <t t-call="website.layout">
+                <div class="container">
+                    <h1>Thank You!</h1>
+                    <p>Your patient registration has been successfully submitted.</p>
+                    <!-- <a href = "appointment_form">Book Appointment</a> -->
+
+                </div>
+            </t>
+        </template>
+
+        
+
+
+    </data>
+</odoo>

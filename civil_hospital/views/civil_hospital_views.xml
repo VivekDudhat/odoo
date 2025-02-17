@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+    <record id="civil_hospital_action" model="ir.actions.act_window">
+        <field name="name">Civil Hospital</field>
+        <field name="res_model">civil.hospital</field>
+         <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Welcome To Civil Hospital
+                </p>
+            </field>
+        
+    </record>
+    
+        <menuitem
+            id="civil_hospital_menu"
+            name="Civil Hospital"
+            action="civil_hospital_action"
+            sequence = "1"
+        />
+    
+    </data>
+    
+</odoo>

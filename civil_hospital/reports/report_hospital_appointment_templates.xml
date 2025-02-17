@@ -1,0 +1,91 @@
+<odoo>
+    <data>
+        <template id="report_hospital_appointment">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Report Header -->
+                        <h2 style="text-align: center; margin-top: 20px; font-family: Arial, sans-serif; color: #333;">Appointment Details</h2>
+
+                        <!-- Table for Appointment Data -->
+                        <t t-if="docs">
+                            <t t-foreach="docs" t-as="doc">
+                                <div style="margin-top: 20px;">
+                                    <h3 style="font-family: Arial, sans-serif; color: #555;">
+                                        Patient Name : <t t-esc="doc.patient_id.display_name" />
+                                    </h3>
+                                    <table class="table table-sm mt32" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 12px;" border="1">
+                                        <thead>
+                                            <tr style="background-color: #f2f2f2; text-align: center;">
+                                                <th style="padding: 8px;">Doctor</th>
+                                                <th style="padding: 8px;">Specialization</th>
+                                                <th style="padding: 8px;">Appointment Date</th>
+                                                <th style="padding: 8px;">Time Slot</th>
+                                                <th style="padding: 8px;">State</th>
+                                                <th style="padding: 8px;">Medicine</th>
+                                                <th style="padding: 8px;">Medicine Cost</th>
+                                                <th style="padding: 8px; text-align: right;">Consultation Fee</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="doc.patient_id.appointment_ids" t-as="appointment">
+                                                <tr>
+                                                    <td style="padding: 8px;">
+                                                        <t t-esc="appointment.doctor_id.display_name" />
+                                                    </td>
+                                                    <td style="padding: 8px;">
+                                                        <t t-esc="appointment.doctor_id.specialization_id.name if appointment.doctor_id and appointment.doctor_id.specialization_id else 'No Specialization'" />
+                                                    </td>
+                                                    <td style="padding: 8px;">
+                                                        <t t-esc="appointment.appointment_date.strftime('%d:%m:%Y')" />
+                                                    </td>
+
+                                                    <td style="padding: 8px;">
+                                                        <t t-esc="appointment.time_slot" />
+                                                    </td>
+                                                    <td style="padding: 8px;">
+                                                        <t t-esc="appointment.state" />
+                                                    </td>
+                                                    <td style="padding: 8px;">
+                                                        <t t-set="medicine_names" t-value="', '.join([medicine.medicine_name for medicine in appointment.medicine_ids])" />
+                                                        <t t-esc="medicine_names" />
+                                                    </td>
+                                                    <td style="padding: 8px;">
+                                                        <t t-set="medicine_costs" t-value="', '.join([str(medicine.medicine_cost) for medicine in appointment.medicine_ids])" />
+                                                        <t t-esc="medicine_costs" />
+                                                    </td>
+                                                    <td style="padding: 8px; text-align: right;">
+                                                        <t t-esc="appointment.consultant_charge" />
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </t>
+
+                            <!-- Total Cost Footer -->
+                            <div style="text-align: right; margin-top: 20px; font-family: Arial, sans-serif; font-size: 14px;">
+                                <b>Consultant Cost:</b>
+                                <t t-esc="appointment.total_cost" />
+                            </div>
+                            <div style="text-align: right; margin-top: 20px; font-family: Arial, sans-serif; font-size: 14px;">
+                                <b>Total Medicine Cost:</b>
+                                <t t-esc="appointment.total_medicine_cost" />
+                            </div>
+                            <div style="text-align: right; margin-top: 20px; font-family: Arial, sans-serif; font-size: 14px;">
+                                <b>Total Bill:</b>
+                                <t t-esc="appointment.total_medicine_cost + appointment.total_cost" />
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div style="text-align: center; padding: 20px; font-style: italic;">
+                                No appointments available.
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <template id="patient_template" name="Patient List Template">
+            <h2 style="text-align:center; font-family: Arial, sans-serif; color: #333;">Patient List</h2>
+
+            <style>
+                .table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                    font-family: 'Arial', sans-serif;
+                }
+
+                .table th, .table td {
+                    padding: 12px 15px;
+                    text-align: left;
+                    border: 1px solid #ddd;
+                }
+
+                .table th {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+                .table tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+
+                .table tr:hover {
+                    background-color: #ddd;
+                }
+
+                p {
+                    font-family: 'Arial', sans-serif;
+                    color: #555;
+                    text-align: center;
+                }
+
+                .action-buttons {
+                    display: flex;
+                    gap: 5px;
+                }
+
+                .filter-form {
+                    margin: 20px auto;
+                    text-align: center;
+                }
+
+                .filter-form select, .filter-form input {
+                    padding: 8px;
+                    margin: 5px;
+                    font-size: 14px;
+                    border: 1px solid #ddd;
+                }
+
+                .filter-form button {
+                    padding: 8px 16px;
+                    background-color: #4CAF50;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                }
+
+                .filter-form button:hover {
+                    background-color: #45a049;
+                }
+            </style>
+
+          
+            <div class="filter-form">
+                <form method="GET" action="/hospital/patient">
+                    <input type="text" name="search" placeholder="Search by Patient Name" t-att-value="search"/>
+
+                    <select name="gender">
+                        <option value="">All Genders</option>
+                        <option value="male" t-att-selected="gender == 'male'">Male</option>
+                        <option value="female" t-att-selected="gender == 'female'">Female</option>
+                    </select>
+
+                    <select name="sort_by">
+                        <option value="">Sort By</option>
+                        <option value="patient_name" t-att-selected="sort_by == 'patient_name'">Name</option>
+                        <option value="age" t-att-selected="sort_by == 'age'">Age</option>
+                    </select>
+
+                    <button type="submit">Apply Filters</button>
+                </form>
+            </div>
+
+      
+            <t t-if="patients">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Date of Birth</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        <t t-foreach="patients" t-as="patient">
+                            <tr>
+                                <td>
+                                    <t t-esc="patient.patient_name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="patient.contact"/>
+                                </td>
+                                <td>
+                                    <t t-esc="patient.email_id"/>
+                                </td>
+                                <td>
+                                    <t t-esc="patient.date_of_birth"/>
+                                </td>
+                                <td>
+                                    <t t-esc="patient.age"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+
+            <t t-if="not patients">
+                <p>No patients found.</p>
+            </t>
+
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <record id="view_hospital_disease_tree" model="ir.ui.view">
+            <field name="name">view.hospital.disease.tree</field>
+            <field name="model">hospital.disease.api</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="disease_input"/>
+                    <field name="remedies"/>
+                    <field name="doctors"/>
+                    
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hospital_disease_form" model="ir.ui.view">
+            <field name="name">hospital.disease.form</field>
+            <field name="model">hospital.disease.api</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Fetch Disease Data" type="object" name="fetch_disease_data" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="disease_input"/>
+                           
+                            <field name="remedies" 
+                            widget="many2many_tags"
+                            />
+                       
+                            <field name="doctors" 
+                            widget="many2many_tags"
+                            />
+                          
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hospital_disease" model="ir.actions.act_window">
+            <field name="name">Hospital Disease Data</field>
+            <field name="res_model">hospital.disease.api</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="disease_api_menu" name="API" action="action_hospital_disease" />
+
+    </data>
+
+</odoo>

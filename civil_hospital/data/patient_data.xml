@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+    
+          <record id="patient_1" model="hospital.patient">
+        <field name="patient_name">John Doe</field>
+        <field name="gender">male</field>
+        <field name="contact">+91 8425085668</field> <!-- Correct format -->
+        <field name="date_of_birth">1985-07-15</field>
+        <field name="email_id">johndoe@example.com</field>
+    </record>
+
+    <!-- Patient 2 -->
+    <record id="patient_2" model="hospital.patient">
+        <field name="patient_name">Jane Smith</field>
+        <field name="gender">female</field>
+        <field name="contact">+91 8780085668</field> <!-- Correct format -->
+        <field name="date_of_birth">1990-03-22</field>
+        <field name="email_id">janesmith@example.com</field>
+    </record>
+
+    <!-- Patient 3 -->
+    <record id="patient_3" model="hospital.patient">
+        <field name="patient_name">Emily White</field>
+        <field name="gender">female</field>
+        <field name="contact">+91 8007385654</field> <!-- Correct format -->
+        <field name="date_of_birth">1982-11-30</field>
+        <field name="email_id">emilywhite@example.com</field>
+    </record>
+
+    <!-- Patient 4 -->
+    <record id="patient_4" model="hospital.patient">
+        <field name="patient_name">Michael Brown</field>
+        <field name="gender">male</field>
+        <field name="contact">+91 9984562575</field> <!-- Correct format -->
+        <field name="date_of_birth">1978-05-10</field>
+        <field name="email_id">michaelbrown@example.com</field>
+    </record>
+
+    <!-- Patient 5 -->
+    <record id="patient_5" model="hospital.patient">
+        <field name="patient_name">Sophia Green</field>
+        <field name="gender">female</field>
+        <field name="contact">+91 7016625455</field> <!-- Correct format -->
+        <field name="date_of_birth">1995-02-14</field>
+        <field name="email_id">sophiagreen@example.com</field>
+    </record>
+
+    <!-- Patient 6 -->
+    <record id="patient_6" model="hospital.patient">
+        <field name="patient_name">David Lee</field>
+        <field name="gender">male</field>
+        <field name="contact">+91 8980216901</field> <!-- Correct format -->
+        <field name="date_of_birth">1988-09-23</field>
+        <field name="email_id">davidlee@example.com</field>
+    </record>
+
+    <!-- Patient 7 -->
+    <record id="patient_7" model="hospital.patient">
+        <field name="patient_name">Olivia Harris</field>
+        <field name="gender">female</field>
+        <field name="contact">+91 8455698956</field> <!-- Correct format -->
+        <field name="date_of_birth">2000-01-01</field>
+        <field name="email_id">oliviaharris@example.com</field>
+    </record>
+    </data>
+    
+</odoo>

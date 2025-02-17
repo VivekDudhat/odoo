@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_hospital_physician_tree" model="ir.ui.view">
+            <field name="name">hospital.physician.tree</field>
+            <field name="model">hospital.physician</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="physician_name"/>
+                    <field name="contact_number"/>
+                    <field name="email"/>
+                    <field name="specialization_id"/>
+                    <field name="fees"/>
+                    <field name="gender"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_hospital_physician_form" model="ir.ui.view">
+            <field name="name">hospital.physician.form</field>
+            <field name="model">hospital.physician</field>
+            <field name="arch" type="xml">
+                <form string="Physician">
+                    <sheet>
+                       
+                        <group>
+                            <field name="physician_name"/>
+                            <field name="contact_number"/>
+                            <field name="email"/>
+                            <field name="gender" widget = "radio" options="{'horizontal': true}"/>
+                            <field name="specialization_id"/>
+                            <field name="fees" readonly="1"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_hospital_physician" model="ir.actions.act_window">
+            <field name="name">Physicians</field>
+            <field name="res_model">hospital.physician</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new physician record.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_hospital_physician" name="Physicians" action="action_hospital_physician" parent = "physician_menu" sequence = "20" />
+
+
+    </data>
+
+</odoo>
